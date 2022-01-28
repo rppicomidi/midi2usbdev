@@ -98,7 +98,7 @@ static void poll_midi_uart_rx(bool connected)
 
 int main() {
 
-    bi_decl(bi_program_description("Provide a USB host interface for Serial Port MIDI."));
+    bi_decl(bi_program_description("Provide a USB device interface for Serial Port MIDI."));
     bi_decl(bi_1pin_with_name(LED_GPIO, "On-board LED"));
     bi_decl(bi_2pins_with_names(MIDI_UART_TX_GPIO, "MIDI UART TX", MIDI_UART_RX_GPIO, "MIDI UART RX"));
 
