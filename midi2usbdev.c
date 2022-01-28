@@ -33,6 +33,7 @@
 #include "bsp/board.h"
 #include "tusb.h"
 #include "class/midi/midi_device.h"
+#include "midi_uart_lib_config.h"
 // On-board LED mapping. If no LED, set to NO_LED_GPIO
 const uint NO_LED_GPIO = 255;
 const uint LED_GPIO = 25;
@@ -109,7 +110,7 @@ int main() {
     gpio_init(LED_GPIO);
     gpio_set_dir(LED_GPIO, GPIO_OUT);
     midi_uart_instance = midi_uart_configure(MIDI_UART_NUM, MIDI_UART_TX_GPIO, MIDI_UART_RX_GPIO);
-    printf("Configured MIDI UART %u for 31250 baud\r\n", MIDI_UART_NUM);
+    printf("Configured MIDI UART %u for %u baud\r\n", MIDI_UART_NUM, MIDI_UART_LIB_BAUD_RATE);
     while (1) {
         tud_task();
 
