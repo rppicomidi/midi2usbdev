@@ -44,7 +44,6 @@ const uint MIDI_UART_TX_GPIO = 4;
 const uint MIDI_UART_RX_GPIO = 5;
 
 static void *midi_uart_instance;
-static uint8_t midi_dev_addr = 0;
 
 static void blink_led(void)
 {
@@ -76,7 +75,7 @@ static void poll_usb_rx(bool connected)
     uint32_t nread = tud_midi_stream_read(rx, sizeof(rx));
     uint8_t npushed = midi_uart_write_tx_buffer(midi_uart_instance,rx,nread);
     if (npushed != nread) {
-        TU_LOG1("Warning: Dropped %d bytes sending to UART MIDI Out\r\n", nread - npushed);
+        TU_LOG1("Warning: Dropped %lu bytes sending to UART MIDI Out\r\n", nread - npushed);
     }
 }
 
@@ -91,7 +90,7 @@ static void poll_midi_uart_rx(bool connected)
     {
         uint32_t nwritten = tud_midi_stream_write(0, rx, nread);
         if (nwritten != nread) {
-            TU_LOG1("Warning: Dropped %d bytes receiving from UART MIDI In\r\n", nread - nwritten);
+            TU_LOG1("Warning: Dropped %lu bytes receiving from UART MIDI In\r\n", nread - nwritten);
         }
     }
 }

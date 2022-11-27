@@ -19,6 +19,8 @@ pico_enable_stdio_uart(midi2usbdev 1)
 
 target_include_directories(midi2usbdev PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
+target_link_options(midi2usbdev PRIVATE -Xlinker --print-memory-usage)
+target_compile_options(midi2usbdev PRIVATE -Wall -Wextra -DCFG_TUSB_DEBUG=1)
 target_link_libraries(midi2usbdev midi_uart_lib tinyusb_device tinyusb_board ring_buffer_lib pico_stdlib)
 
 pico_add_extra_outputs(midi2usbdev)
